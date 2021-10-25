@@ -3,7 +3,7 @@
 
     LoRaWAN Gateway for the Victron VE.Direct-Protocol based on an Adafruit Feather M0 LoRa
 
-    The Victron device will be connected through Serial1 of the Feather M0.
+    The Victron device will be connected through additional Serial2 of the Feather M0.
     A level shifter has to be used, because the Victron Solar Chargers use 5V level, the Feather M0 3.3V.
 
     ----------------------------------------

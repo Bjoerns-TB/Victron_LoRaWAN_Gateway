@@ -42,7 +42,8 @@ void SERCOM1_Handler()
 }
 
 long previousMillis = 0;
-long interval = 60000;
+long interval = 60000;  //send interval when charge controller active (CS > 0)
+long interval2 = 300000;  //send interval when charge controller inactive (CS == 0)
 
 // Pin mapping
 #define LMIC_NSS    8
@@ -412,9 +413,11 @@ void PrintValues() {
 }
 
 //LoRa Sending
-
 void SendLoRa() {
-  if (millis() - previousMillis > 60000) {
+  if ((atoi(value[CS]) > 0) && (millis() - previousMillis > interval)) {
+    do_send(&sendjob);
+    previousMillis = millis();
+  } else if (millis() - previousMillis > interval2) {
     do_send(&sendjob);
     previousMillis = millis();
   }
